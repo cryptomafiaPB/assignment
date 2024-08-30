@@ -10,9 +10,9 @@ function User({ user }: any) {
         <img
           className="cursor-pointer relative rounded-full w-14 h-14 hover:w-[54px] hover:h-[54px] duration-100"
           src={
-            user.picture.data.url ||
             "https://i.etsystatic.com/10131659/r/il/0f522b/3870142171/il_fullxfull.3870142171_5sym.jpg"
           }
+          // user.picture.data.url ||
           alt="user image"
         />
       </div>
