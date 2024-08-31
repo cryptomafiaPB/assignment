@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "i.etsystatic.com",
+        hostname: "platform-lookaside.fbsbx.com",
         port: "",
         pathname: "",
       },

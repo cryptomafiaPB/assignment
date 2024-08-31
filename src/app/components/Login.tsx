@@ -1,19 +1,16 @@
-"use client";
 import axios from "axios";
-import React, { useState } from "react";
+import React from "react";
 import FacebookLogin, {
   FacebookLoginAuthResponse,
 } from "react-facebook-login-lite";
-import { FaFacebook } from "react-icons/fa";
 
-function Login({ setUser }: any) {
-  const [buttonHover, setButtonHover] = useState(false);
+function Login({ setUser }: { setUser: any }) {
   const responceFB = async (response: FacebookLoginAuthResponse) => {
     const { accessToken } = response.authResponse;
     const userResponse = await axios.post("/api/auth/facebook", {
       accessToken,
     });
-    console.log(userResponse.data);
+    console.log("userResponce: ", userResponse.data.picture.data.url);
     setUser({ ...userResponse.data, accessToken });
   };
 
@@ -29,20 +26,7 @@ function Login({ setUser }: any) {
         </p>
       </div>
       <div className="p-6 flex flex-col  align-middle justify-center">
-        <button
-          onMouseEnter={() => {
-            setButtonHover(true);
-          }}
-          onMouseLeave={() => {
-            setButtonHover(false);
-          }}
-          className="px-4 py-[2px] hover:mx-4 hover:p-0 rounded-full flex border text-blue-500 font-bold border-blue-900 flex-row items-center  align-middle justify-center  duration-100 hover:shadow-lg hover:transform hover:translate-y-1 hover:translate-x-1 hover:rounded-sm "
-        >
-          {/* <FaFacebook
-            className={`mr-2 rounded-full ${
-              buttonHover ? "text-white" : "text-blue-500"
-            }`}
-          /> */}
+        <button className="px-4 py-[2px] hover:mx-4 hover:p-0 rounded-full flex border text-blue-500 font-bold border-blue-900 flex-row items-center  align-middle justify-center  duration-100 hover:shadow-lg hover:transform hover:translate-y-1 hover:translate-x-1 hover:rounded-sm ">
           <FacebookLogin
             appId="893860872775466"
             onSuccess={responceFB}
@@ -51,7 +35,6 @@ function Login({ setUser }: any) {
             scope="public_profile,email,pages_show_list,pages_read_engagement,read_insights"
             fields="name,email,picture"
           />
-          {/* <h2 className="text-base">Login with Facebook</h2> */}
         </button>
       </div>
     </div>

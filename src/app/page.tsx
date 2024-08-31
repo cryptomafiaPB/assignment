@@ -1,6 +1,6 @@
 "use client";
 import Login from "@/app/components/Login";
-import { use, useState } from "react";
+import { useState } from "react";
 import User from "./components/User";
 import Pages from "./components/Pages";
 import { Users } from "@/types/types";
@@ -14,7 +14,7 @@ export default function Home() {
           <Login setUser={setUser} />
         ) : (
           <>
-            <User user={user} />
+            {user && <User user={user} />}
             <Pages accessToken={user.accessToken} userId={user.id} />
           </>
         )}
