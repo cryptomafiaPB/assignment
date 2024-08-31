@@ -23,6 +23,7 @@ export const POST = async (req: Request) => {
         console.log("Cannot find page access token", error);
     }
     try {
+        console.log(pageAccessToken)
         const response = await axios.get(
             `https://graph.facebook.com/${selectedPageId}/insights?metric=page_follows,page_post_engagements,page_views_total,page_fans&access_token=${pageAccessToken}&period${period}&since${since}&until${until}`
         );
