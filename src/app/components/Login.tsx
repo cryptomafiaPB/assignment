@@ -31,7 +31,7 @@ function Login({ setUser }: { setUser: any }) {
             appId="893860872775466"
             // appId={process.env.FACEBOOK_APPID}
             onSuccess={responceFB}
-            imgSrc="https://static.vecteezy.com/system/resources/previews/018/930/476/original/facebook-logo-facebook-icon-transparent-free-png.png"
+            imgSrc="/facebook-logo.webp"
             onFailure={(error) => console.error("Login failed:", error)}
             scope="public_profile,email,pages_show_list,pages_read_engagement,read_insights"
             fields="name,email,picture"

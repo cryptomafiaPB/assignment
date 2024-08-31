@@ -1,5 +1,4 @@
 import axios from "axios";
-import { NextApiRequest, NextApiResponse } from "next";
 
 interface access_token {
     accessToken: string

@@ -13,10 +13,7 @@ function User({ user }: { user: Users }) {
         <Link href={user?.picture.data.url}>
           <Avatar>
             <AvatarImage
-              src={
-                // `${user.picture.data.url}` ||
-                "/profileIcons.webp"
-              }
+              src={`${user.picture.data.url}` || "/profileIcons.webp"}
               alt="Avatar Profile"
             />
             <AvatarFallback>O</AvatarFallback>
