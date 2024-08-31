@@ -1,7 +1,6 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Users } from "@/types/types";
-import Link from "next/link";
 
 function User({ user }: { user: Users }) {
   return (
@@ -10,15 +9,13 @@ function User({ user }: { user: Users }) {
         <h1 className="pb-4 font-bold hover:font-semibold duration-100 cursor-pointer">
           {user?.name}
         </h1>
-        <Link href={user?.picture.data.url}>
-          <Avatar>
-            <AvatarImage
-              src={`${user.picture.data.url}` || "/profileIcons.webp"}
-              alt="Avatar Profile"
-            />
-            <AvatarFallback>O</AvatarFallback>
-          </Avatar>
-        </Link>
+        <Avatar>
+          <AvatarImage
+            src={`${user.picture.data.url}` || "/profileIcons.webp"}
+            alt="Avatar Profile"
+          />
+          <AvatarFallback>O</AvatarFallback>
+        </Avatar>
       </div>
     </div>
   );
