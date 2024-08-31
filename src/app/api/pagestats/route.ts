@@ -7,8 +7,8 @@ export interface PageStatsAPI {
 
 export const POST = async (req: Request) => {
 
-    const { selectedPageId, accessToken, since, until, userId } = await req.json()
-    console.log(selectedPageId, accessToken, userId)
+    const { selectedPageId, accessToken, since, until, userId, period } = await req.json()
+    console.log(selectedPageId, accessToken, userId, since, until, period)
 
     let pageAccessToken;
     try {
@@ -24,7 +24,7 @@ export const POST = async (req: Request) => {
     }
     try {
         const response = await axios.get(
-            `https://graph.facebook.com/${selectedPageId}/insights?metric=page_follows,page_post_engagements,page_views_total,page_fans&access_token=${pageAccessToken}`
+            `https://graph.facebook.com/${selectedPageId}/insights?metric=page_follows,page_post_engagements,page_views_total,page_fans&access_token=${pageAccessToken}&period${period}&since${since}&until${until}`
         );
         return new Response(JSON.stringify(response.data), { status: 200 })
     } catch (error) {

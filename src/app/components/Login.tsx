@@ -29,6 +29,7 @@ function Login({ setUser }: { setUser: any }) {
         <button className="px-4 py-[2px] hover:mx-4 hover:p-0 rounded-full flex border text-blue-500 font-bold border-blue-900 flex-row items-center  align-middle justify-center  duration-100 hover:shadow-lg hover:transform hover:translate-y-1 hover:translate-x-1 hover:rounded-sm ">
           <FacebookLogin
             appId="893860872775466"
+            // appId={process.env.FACEBOOK_APPID}
             onSuccess={responceFB}
             imgSrc="https://static.vecteezy.com/system/resources/previews/018/930/476/original/facebook-logo-facebook-icon-transparent-free-png.png"
             onFailure={(error) => console.error("Login failed:", error)}

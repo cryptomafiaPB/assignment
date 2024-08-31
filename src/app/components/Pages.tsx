@@ -18,6 +18,8 @@ function Pages({
   });
   const [selectedPageId, setSelectedPageId] = useState("");
   const [loading, setLoading] = useState(true);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
     const fetchPages = async () => {
@@ -30,10 +32,15 @@ function Pages({
   }, [accessToken]);
 
   const fetchPageStats = async (accessToken: string) => {
-    const since = Math.floor(
-      new Date().setDate(new Date().getDate() - 7) / 1000
-    );
-    const until = Math.floor(new Date().getTime() / 1000);
+    if (!startDate || !endDate) {
+      window.alert("Please select both start and end dates.");
+      return;
+    }
+
+    const since = new Date(startDate).toISOString().split("T")[0];
+    const until = new Date(endDate).toISOString().split("T")[0];
+    const period = "total_over_range";
+
     try {
       const response = await axios.post("/api/pagestats", {
         userId,
@@ -41,8 +48,9 @@ function Pages({
         accessToken,
         since,
         until,
+        period,
       });
-
+      console.log("since, until, period :", since, until, period);
       const data = response.data.data.reduce((acc: any, item: any) => {
         const metricName = item.name;
         const latestValue = item.values[item.values.length - 1].value;
@@ -85,13 +93,34 @@ function Pages({
             </option>
           ))}
         </select>
+        <div className="flex gap-2">
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="bg-gray-50 border duration-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="bg-gray-50 border duration-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          />
+        </div>
         <button
+          type="submit"
+          className="bg-blue-500 text-lg duration-100 hover:text-xl hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          disabled={!selectedPageId || !startDate || !endDate}
+        >
+          Submit
+        </button>
+        {/* <button
           type="submit"
           className="bg-blue-500 text-lg duration-100 hover:text-xl hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           disabled={!selectedPageId}
         >
           Submit
-        </button>
+        </button> */}
       </form>
       <h2 className="text-2xl font-bold mb-4 text-center">Page Insights</h2>
       {loading ? (
