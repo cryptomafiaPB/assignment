@@ -79,7 +79,7 @@ function Pages({
           e.preventDefault();
           fetchPageStats(accessToken);
         }}
-        className="flex items-center m-4 relative gap-2"
+        className="flex flex-col items-center m-4 relative gap-2 md:flex-row"
       >
         <select
           value={selectedPageId}
